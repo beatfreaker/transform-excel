@@ -10,8 +10,6 @@
     <label id="process" style="margin-left: 15px"></label>
 
     <div style="margin-top: 20px">
-        <label>Data fetched from database:</label>
-        <pre id="user-data"></pre>
     </div>
 
     <script type="text/javascript">
@@ -24,9 +22,6 @@
                 fetch('http://localhost:8080/upload', { method: 'POST', body: formData })
                     .then(r => {
                         document.querySelector('#process').innerHTML = "File uploaded successfully.";
-                        fetch('http://localhost:8080/users').then(resp => resp.json()).then(users => {
-                            document.querySelector('pre').innerHTML = JSON.stringify(users, null, 2);
-                        });
                     })
                     .catch(e => {
                         document.querySelector('#process').innerHTML = "Failed uploading file.";
