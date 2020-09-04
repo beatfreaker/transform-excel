@@ -35,7 +35,7 @@ public class ProcessExcelService {
         return fileLocation;
     }
 
-    public void processExcelFile(String fileLocation) throws Exception {
+    public String processExcelFile(String fileLocation) throws Exception {
         FileInputStream excelFile = new FileInputStream(new File(fileLocation));
         Workbook workbook = new XSSFWorkbook(excelFile);
         Sheet sheet = workbook.getSheetAt(0);
@@ -53,6 +53,7 @@ public class ProcessExcelService {
                 }).collect(Collectors.toList());
         String json = getJSON(dataList);
         System.out.println(json);
+        return json;
     }
 
     private String getJSON(List<Data> dataList) throws Exception {
