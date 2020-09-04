@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Implementation-Title: csvtojson
+Implementation-Version: 2.1.3.RELEASE
+Archiver-Version: Plexus Archiver
+Built-By: Beatfreaker
+Implementation-Vendor-Id: com.example
+Spring-Boot-Version: 2.1.3.RELEASE
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: com.example.DemoApplication
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_131
+Implementation-URL: http://projects.spring.io/spring-boot/bankim/
