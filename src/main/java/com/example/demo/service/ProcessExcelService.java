@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Data;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -13,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -37,18 +39,24 @@ public class ProcessExcelService {
 
     public String processExcelFile(String fileLocation) throws Exception {
         FileInputStream excelFile = new FileInputStream(new File(fileLocation));
-        Workbook workbook = new XSSFWorkbook(excelFile);
+        Workbook workbook = new HSSFWorkbook(excelFile);
         Sheet sheet = workbook.getSheetAt(0);
         List<Data> dataList = StreamSupport.stream(sheet.spliterator(), false)
-                .skip(1)
+                .skip(2)
+                .filter(r -> Objects.nonNull(r.getCell(0)))
                 .map(r -> {
                     Data u = new Data();
-                    u.setId(r.getCell(0).getStringCellValue());
-                    u.setQuantity(String.valueOf(r.getCell(1).getNumericCellValue()));
-                    u.setAmount(String.valueOf(r.getCell(2).getNumericCellValue()));
-                    u.setNonBillableQuantity(String.valueOf(r.getCell(3).getNumericCellValue()));
-                    u.setNonBillableAmount(String.valueOf(r.getCell(4).getNumericCellValue()));
-                    u.setNotional(r.getCell(5).getStringCellValue());
+                    u.setCusip(r.getCell(0).getStringCellValue());
+                    u.setCategory(r.getCell(1).getStringCellValue());
+                    u.setTrans(r.getCell(2).getStringCellValue());
+                    u.setStatus(r.getCell(3).getStringCellValue());
+                    u.setType(r.getCell(4).getStringCellValue());
+                    u.setOrders(String.valueOf(r.getCell(5).getNumericCellValue()));
+                    u.setQuantity((long)r.getCell(6).getNumericCellValue());
+                    u.setNonBillableOrders((long)r.getCell(7).getNumericCellValue());
+                    u.setQtyForNonBillableOrder((long)r.getCell(8).getNumericCellValue());
+                    u.setNotional(u.getQuantity() * 1000);
+                    u.setNonBillableNotional(u.getQtyForNonBillableOrder() * 1000);
                     return u;
                 }).collect(Collectors.toList());
         String json = getJSON(dataList);

@@ -1,27 +1,77 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Data {
 
-    private String id;
-    private String quantity;
+    @JsonProperty("CUSIP")
+    private String cusip;
+    private String category;
+    private String trans;
+    private String status;
+    private String type;
+    private String orders;
+    private long quantity;
     private String amount;
     private String nonBillableQuantity;
-    private String nonBillableAmount;
-    private String notional;
+    private long nonBillableOrders;
+    private long qtyForNonBillableOrder;
+    private long notional;
+    private long nonBillableNotional;
 
-    public String getId() {
-        return id;
+    public String getCusip() {
+        return cusip;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCusip(String cusip) {
+        this.cusip = cusip;
     }
 
-    public String getQuantity() {
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getTrans() {
+        return trans;
+    }
+
+    public void setTrans(String trans) {
+        this.trans = trans;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getOrders() {
+        return orders;
+    }
+
+    public void setOrders(String orders) {
+        this.orders = orders;
+    }
+
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
@@ -41,19 +91,35 @@ public class Data {
         this.nonBillableQuantity = nonBillableQuantity;
     }
 
-    public String getNonBillableAmount() {
-        return nonBillableAmount;
+    public long getNonBillableOrders() {
+        return nonBillableOrders;
     }
 
-    public void setNonBillableAmount(String nonBillableAmount) {
-        this.nonBillableAmount = nonBillableAmount;
+    public void setNonBillableOrders(long nonBillableOrders) {
+        this.nonBillableOrders = nonBillableOrders;
     }
 
-    public String getNotional() {
+    public long getQtyForNonBillableOrder() {
+        return qtyForNonBillableOrder;
+    }
+
+    public void setQtyForNonBillableOrder(long qtyForNonBillableOrder) {
+        this.qtyForNonBillableOrder = qtyForNonBillableOrder;
+    }
+
+    public long getNotional() {
         return notional;
     }
 
-    public void setNotional(String notional) {
+    public void setNotional(long notional) {
         this.notional = notional;
+    }
+
+    public long getNonBillableNotional() {
+        return nonBillableNotional;
+    }
+
+    public void setNonBillableNotional(long nonBillableNotional) {
+        this.nonBillableNotional = nonBillableNotional;
     }
 }
